@@ -12,6 +12,5 @@ Students are expected to:
 Student Info
 =======================
 
-Name: Pham Minh Long
-Student ID: M21.ICT.008
-
+* Name: Pham Minh Long
+* Student ID: M21.ICT.008
