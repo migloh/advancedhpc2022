@@ -4,7 +4,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 from numba import cuda
 
-img = plt.imread('assets/bird.png')
+img = plt.imread('images/bird.png')
 img_h = img.shape[0]
 img_w = img.shape[1]
 rgb_to_gray = [0.2989, 0.5870, 0.1140]
@@ -14,8 +14,9 @@ grayimg = np.zeros(img_w*img_h)
 
 start_man = time.time()
 for i in range(len(reshaped_img)):
-    grayimg[i] = reshaped_img[i][0]*rgb_to_gray[0] + reshaped_img[i][1] * \
-        rgb_to_gray[1] + reshaped_img[i][2]*rgb_to_gray[2]
+    # grayimg[i] = reshaped_img[i][0]*rgb_to_gray[0] + reshaped_img[i][1] * \
+    #     rgb_to_gray[1] + reshaped_img[i][2]*rgb_to_gray[2]
+    grayimg[i] = (reshaped_img[i][0] +reshaped_img[i][1]+ reshaped_img[i][2])/3
 stop_man = time.time()
 
 print("Manual transformation time: ", stop_man-start_man)
@@ -56,7 +57,7 @@ for bs in block_size:
     collapsed_time.append(sum(duration)/len(duration)) 
 
 fig, ax = plt.subplots()
-# ax.imshow(hostOutput, cmap='gray', vmin=0, vmax=1)
+# ax.imshow(grayimg, cmap='gray', vmin=0, vmax=1)
 ax.plot(block_size, collapsed_time)
 ax.set_xlabel('Block size')
 ax.set_ylabel('Execution time')
