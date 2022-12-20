@@ -1,6 +1,6 @@
 \documentclass{article}
 \usepackage[utf8]{inputenc}
-\usepackage[a4paper, total={6in, 8in}]{geometry}
+\usepackage[a4paper, total={6in, 8.5in}]{geometry}
 \usepackage{indentfirst}
 \usepackage{fancyvrb}
 \usepackage{array}
@@ -18,7 +18,14 @@
 
 \maketitle
 
-% \section{Overall pipeline}
+\section{Hardware}
+The following hardwares were used to do the labwork:
+\begin{itemize}
+    \item CPU: Intel Core i5-8250U 
+    \item GPU: NVIDIA GeForce MX130
+\end{itemize}
+
+\section{Implementation}
 The steps to do the labwork:
 \begin{itemize}
     \item Load an RGB image to an multidimensional array, which has the shape of (height, width, 3).
@@ -29,7 +36,7 @@ The steps to do the labwork:
 
 \begin{figure}[H]
     \center{
-        \includegraphics[scale=0.4]{images/bird.png}
+        \includegraphics[scale=0.3]{images/bird.png}
     }
     \caption{Sample image}
 \end{figure}

@@ -14,9 +14,7 @@ grayimg = np.zeros(img_w*img_h)
 
 start_man = time.time()
 for i in range(len(reshaped_img)):
-    # grayimg[i] = reshaped_img[i][0]*rgb_to_gray[0] + reshaped_img[i][1] * \
-    #     rgb_to_gray[1] + reshaped_img[i][2]*rgb_to_gray[2]
-    grayimg[i] = (reshaped_img[i][0] + reshaped_img[i][1]+ reshaped_img[i][2])/3
+    grayimg[i] = np.float32((reshaped_img[i][0] + reshaped_img[i][1] + reshaped_img[i][2])/3)
 stop_man = time.time()
 
 print("Manual transformation time: ", stop_man-start_man)
