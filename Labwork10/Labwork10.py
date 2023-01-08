@@ -53,10 +53,10 @@ def KuwaharaCPU(srcRGB, srcHSV, padsize):
 
     for tidx in range(srcRGB.shape[0]):
         for tidy in range(srcRGB.shape[1]):
-            coorList = (((tidx-wsize, tidx+1), (tidy-wsize, tidy+1)),
-                        ((tidx, tidx+wsize+1), (tidy-wsize, tidy+1)),
-                        ((tidx-wsize, tidx+1), (tidy, tidy+wsize+1)),
-                        ((tidx, tidx+wsize+1), (tidy, tidy+wsize+1)))
+            coorList = (((tidx-padsize, tidx+1), (tidy-padsize, tidy+1)),
+                        ((tidx, tidx+padsize+1), (tidy-padsize, tidy+1)),
+                        ((tidx-padsize, tidx+1), (tidy, tidy+padsize+1)),
+                        ((tidx, tidx+padsize+1), (tidy, tidy+padsize+1)))
             if tidx < padsize or tidx >= srcRGB.shape[0] - padsize or tidy < padsize or tidy >= srcRGB.shape[1] - padsize:
                 finalrgb[tidx, tidy, 0] = finalrgb[tidx,
                                                    tidy, 1] = finalrgb[tidx, tidy, 2] = 0
@@ -112,10 +112,10 @@ def KuwaharaGPU(srcRGB, srcHSV, dst, padsize):
 
     minid = 0
     minstd = 9999.0
-    coorList = (((tidx-wsize, tidx+1), (tidy-wsize, tidy+1)),
-                ((tidx, tidx+wsize+1), (tidy-wsize, tidy+1)),
-                ((tidx-wsize, tidx+1), (tidy, tidy+wsize+1)),
-                ((tidx, tidx+wsize+1), (tidy, tidy+wsize+1)))
+    coorList = (((tidx-padsize, tidx+1), (tidy-padsize, tidy+1)),
+                ((tidx, tidx+padsize+1), (tidy-padsize, tidy+1)),
+                ((tidx-padsize, tidx+1), (tidy, tidy+padsize+1)),
+                ((tidx, tidx+padsize+1), (tidy, tidy+padsize+1)))
 
     for co in range(4):
         sam = np.float32(0.0)
@@ -160,11 +160,11 @@ stop_cuda = time.time()
 rgbimg = rgbFinal.copy_to_host()
 hsvout = hsvOutput.copy_to_host()
 plt.imsave('images/gputransformed.png', rgbimg)
-print('RGB to HSV: ', stop_cuda-start_cuda)
+print('Kuwahara using GPU: ', stop_cuda-start_cuda)
 
 start_cuda = time.time()
 imgcpu = KuwaharaCPU(padded_img, hsvout, wsize)
 stop_cuda = time.time()
-print('RGB to HSV with cpu: ', stop_cuda-start_cuda)
+print('Kuwahara using CPU: ', stop_cuda-start_cuda)
 rgbimg = rgbFinal.copy_to_host()
 plt.imsave('images/cputransformed.png', rgbimg)
