@@ -90,9 +90,9 @@ def gaussblurshare(src, dst, filter):
     bb = 0
     for ii in range(0, 7):
         for jj in range(0, 7):
-            rr += src[tidx-3+ii, tidy-3+jj, 0]*filter[ii, jj]
-            gg += src[tidx-3+ii, tidy-3+jj, 1]*filter[ii, jj]
-            bb += src[tidx-3+ii, tidy-3+jj, 2]*filter[ii, jj]
+            rr += src[tidx-3+ii, tidy-3+jj, 0]*tile[ii, jj]
+            gg += src[tidx-3+ii, tidy-3+jj, 1]*tile[ii, jj]
+            bb += src[tidx-3+ii, tidy-3+jj, 2]*tile[ii, jj]
     dst[tidx-3, tidy-3, 0] = np.float32(rr/1003)
     dst[tidx-3, tidy-3, 1] = np.float32(gg/1003)
     dst[tidx-3, tidy-3, 2] = np.float32(bb/1003)
