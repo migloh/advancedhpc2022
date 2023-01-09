@@ -96,7 +96,7 @@ For each pixel, I defined a list of windows' ranges to loop over it so that repe
 \end{verbatim}
 
 
-Regarding the benchmark, due to the limitation of the local hardware, I can only set the block size of (4, 4) at maximum for GPU implementation. I only measured the time to execute the main function implementing Kuwahara filter. In the case in which the block size is (4, 4), the execution time using GPU was less than 1 second, which is much faster than the function to implement the filter using CPU. 
+Regarding the benchmark, due to the limitation of the local hardware, I can only set the block size of (4, 4) at maximum for GPU implementation. I only measured the time to execute the main function implementing Kuwahara filter. In the case in which the block size is (4, 4), the execution time using GPU was around 1 second, which is much faster than the function to implement the filter using CPU. 
 
 \begin{figure}[H]
     \center{

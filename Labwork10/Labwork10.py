@@ -75,11 +75,15 @@ def KuwaharaCPU(srcRGB, srcHSV, padsize):
                     for i in range(*coorList[co][0]):
                         for j in range(*coorList[co][1]):
                             sam += srcHSV[2, i, j]
-                            tempsqrd += srcHSV[2, i, j]**2
 
                     n = (padsize+1)**2
                     tempMean = sam/n
-                    stdd = math.sqrt(abs((tempsqrd / n) - tempMean**2))
+
+                    for i in range(*coorList[co][0]):
+                        for j in range(*coorList[co][1]):
+                            tempsqrd += (srcHSV[2, i, j] - tempMean)**2
+
+                    stdd = math.sqrt(tempsqrd/(n-1))
                     if stdd < minstd:
                         minstd = stdd
                         minid = co
@@ -124,11 +128,15 @@ def KuwaharaGPU(srcRGB, srcHSV, dst, padsize):
         for i in range(*coorList[co][0]):
             for j in range(*coorList[co][1]):
                 sam = sam + srcHSV[2, i, j]
-                tempsqrd = tempsqrd + srcHSV[2, i, j]**2
 
         n = (padsize+1)**2
         tempMean = sam/n
-        stdd = math.sqrt(abs(tempsqrd / n - tempMean**2))
+
+        for i in range(*coorList[co][0]):
+            for j in range(*coorList[co][1]):
+                tempsqrd += (srcHSV[2, i, j] - tempMean)**2
+
+        stdd = math.sqrt(tempsqrd/(n-1))
         if stdd < minstd:
             minstd = stdd
             minid = co
